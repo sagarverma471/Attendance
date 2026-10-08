@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08090d">
+  <title>SwipeAttend — Attendance. Just Swipe.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo">S</div>
+      <div>
+        <strong>SwipeAttend</strong>
+        <small>Attendance. Just Swipe.</small>
+      </div>
+    </div>
+
+    <nav>
+      <button class="nav-item active" data-page="dashboard"><span>⌂</span> Dashboard</button>
+      <button class="nav-item" data-page="attendance"><span>✓</span> Attendance</button>
+      <button class="nav-item" data-page="classes"><span>▣</span> Classes</button>
+      <button class="nav-item" data-page="students"><span>♙</span> Students</button>
+      <button class="nav-item" data-page="reports"><span>▤</span> Reports</button>
+      <button class="nav-item" data-page="settings"><span>⚙</span> Settings</button>
+    </nav>
+
+    <div class="profile">
+      <div class="avatar">AS</div>
+      <div>
+        <strong>Dr. Ankit Sharma</strong>
+        <small>CSE Department</small>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu">☰</button>
+      <div class="top-search">⌕ <input id="globalSearch" placeholder="Search classes or students..."></div>
+      <div class="top-actions">
+        <button class="icon-btn">◔</button>
+        <button class="icon-btn">◉</button>
+        <div class="mini-profile">AS</div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="page active" id="dashboard">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">TEACHER DASHBOARD</p>
+          <h1>Good evening, Professor <span>👋</span></h1>
+          <p class="muted">Here are your classes for today.</p>
+        </div>
+        <button class="purple-btn" id="quickStart">＋ Start Attendance</button>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span>Today's Classes</span><strong>3</strong><small>+1 from yesterday</small>
+        </div>
+        <div class="stat-card">
+          <span>Completed</span><strong>2</strong><small>67% completed</small>
+        </div>
+        <div class="stat-card">
+          <span>Total Students</span><strong>156</strong><small>Across today's classes</small>
+        </div>
+        <div class="stat-card accent-stat">
+          <span>Average Attendance</span><strong>89.4%</strong><small>+2.1% this month</small>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">SCHEDULE</p>
+          <h2>Today's Classes</h2>
+        </div>
+        <button class="text-btn">View Timetable →</button>
+      </div>
+
+      <div class="class-grid" id="classGrid"></div>
+    </section>
+
+    <!-- ATTENDANCE -->
+    <section class="page" id="attendance">
+      <div class="attendance-top">
+        <button class="back-btn" id="backDashboard">← Dashboard</button>
+        <div class="session-title">
+          <p class="eyebrow" id="subjectTitle">DATABASE MANAGEMENT SYSTEM</p>
+          <h2 id="classTitle">B.Tech CSE · 3rd Year · Section A</h2>
+        </div>
+        <button class="end-btn" id="endSession">End Session</button>
+      </div>
+
+      <div class="progress-area">
+        <div class="progress-labels">
+          <span id="studentPosition">1 / 10 Students</span>
+          <span><b class="green" id="presentCount">0</b> Present &nbsp; <b class="red" id="absentCount">0</b> Absent &nbsp; <b id="remainingCount">10</b> Remaining</span>
+        </div>
+        <div class="progress-track"><div id="progressBar"></div></div>
+      </div>
+
+      <div class="deck-area">
+        <div id="deck" class="deck"></div>
+      </div>
+
+      <div class="gesture-controls">
+        <button class="round-action absent" id="absentButton"><b>×</b><span>Absent</span></button>
+        <button class="round-action undo" id="undoButton"><b>↶</b><span>Undo</span></button>
+        <button class="round-action present" id="presentButton"><b>✓</b><span>Present</span></button>
+      </div>
+      <p class="gesture-hint">← Swipe left for Absent &nbsp; · &nbsp; Swipe right for Present &nbsp; · &nbsp; Use ← / → keys</p>
+    </section>
+
+    <!-- SUMMARY -->
+    <section class="page" id="summary">
+      <div class="summary-wrap">
+        <div class="success-mark">✓</div>
+        <p class="eyebrow">ATTENDANCE COMPLETE</p>
+        <h1>Great work.</h1>
+        <p class="muted" id="summaryMeta">Database Management System · CSE-A</p>
+
+        <div class="summary-stat-grid">
+          <div><strong id="summaryTotal">10</strong><span>Total Students</span></div>
+          <div class="green-box"><strong id="summaryPresent">0</strong><span>Present</span></div>
+          <div class="red-box"><strong id="summaryAbsent">0</strong><span>Absent</span></div>
+          <div><strong id="summaryPercent">0%</strong><span>Attendance</span></div>
+        </div>
+
+        <div class="summary-list" id="summaryList"></div>
+
+        <div class="summary-actions">
+          <button class="secondary-btn" id="summaryBack">View Dashboard</button>
+          <button class="purple-btn" id="saveFinish">✓ Save & Finish</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- OTHER DEMO PAGES -->
+    <section class="page" id="classes">
+      <div class="page-heading"><div><p class="eyebrow">MANAGEMENT</p><h1>Classes</h1><p class="muted">Manage your assigned classes and subjects.</p></div></div>
+      <div class="class-grid" id="classesPageGrid"></div>
+    </section>
+
+    <section class="page" id="students">
+      <div class="page-heading"><div><p class="eyebrow">STUDENT DIRECTORY</p><h1>Students</h1><p class="muted">Search and review student attendance.</p></div></div>
+      <div class="table-card">
+        <div class="table-head"><strong>Students</strong><input id="studentSearch" placeholder="Search student..."></div>
+        <div class="student-table" id="studentTable"></div>
+      </div>
+    </section>
+
+    <section class="page" id="reports">
+      <div class="page-heading"><div><p class="eyebrow">ANALYTICS</p><h1>Reports</h1><p class="muted">Attendance trends at a glance.</p></div></div>
+      <div class="report-grid">
+        <div class="chart-card"><span>Overall Attendance</span><strong>89.4%</strong><div class="fake-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="chart-card"><span>Students At Risk</span><strong class="red">7</strong><p class="muted">Below 75% attendance</p></div>
+        <div class="chart-card"><span>Highest Attendance</span><strong class="green">100%</strong><p class="muted">12 students</p></div>
+      </div>
+    </section>
+
+    <section class="page" id="settings">
+      <div class="page-heading"><div><p class="eyebrow">PREFERENCES</p><h1>Settings</h1><p class="muted">Configure your SwipeAttend experience.</p></div></div>
+      <div class="settings-card">
+        <label>Minimum attendance requirement <input type="number" value="75"> %</label>
+        <label>Default attendance order <select><option>Roll Number</option><option>Name</option><option>Random</option></select></label>
+        <label class="switch-row">Show attendance percentage on student cards <input type="checkbox" checked></label>
+        <button class="purple-btn">Save Settings</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
